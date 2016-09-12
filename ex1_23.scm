@@ -22,9 +22,10 @@
   (find-divisor n 2))
 
 (define (find-divisor n test-divisor)
+  (define inc (if (equal? test-divisor 2) 1 2))
   (cond ((> (square test-divisor) n) n)
 	((divides? test-divisor n) test-divisor)
-	(else (find-divisor n (+ test-divisor 1)))))
+	(else (find-divisor n (+ test-divisor inc)))))
 
 (define (divides? a b)
   (= (remainder b a) 0))
