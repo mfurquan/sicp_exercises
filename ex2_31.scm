@@ -1,0 +1,13 @@
+;(define (tree-map proc tree)
+;  (cond ((null? tree) '())
+;	((pair? tree)
+;	 (cons (tree-map proc (car tree))
+;	       (tree-map proc  (cdr tree))))
+;	(else (proc tree))))
+
+(define (tree-map proc tree)
+  (map (lambda (sub-tree)
+	 (if (pair? sub-tree)
+	   (tree-map proc sub-tree)
+	   (proc sub-tree)))
+       tree))

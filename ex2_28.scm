@@ -1,0 +1,5 @@
+(define (fringe item)
+  (cond ((null? item) item)
+	((not (pair? item)) (list item))
+	(else (append (fringe (car item))
+		(fringe (cdr item))))))
