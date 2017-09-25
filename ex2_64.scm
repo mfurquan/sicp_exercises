@@ -10,7 +10,7 @@
       (let ((left-result (partial-tree elts left-size)))
 	(let ((left-tree (car left-result))
 	      (non-left-elts (cdr left-result))
-	      (right-size (- (+ left-size 1))))
+	      (right-size (- n (+ left-size 1))))
 	  (let ((this-entry (car non-left-elts))
 		(right-result (partial-tree
 				(cdr non-left-elts)
