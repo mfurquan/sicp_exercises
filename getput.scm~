@@ -1,4 +1,3 @@
-;lang r5rs
 ;defines get and put operations for data-directed programming
 (define (make-table)
   (let ((local-table (list '*table*)))
