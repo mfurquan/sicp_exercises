@@ -4,7 +4,7 @@
   (cond ((number? expr) 0)
 	((variable? expr) (if (same-variable? expr var) 1 0))
 	(else (let ((operator (car expr)) (operands (cdr expr)))
-		((get 'deriv operator) operands var)))))
+		((get operator 'deriv) operands var)))))
 
 (define (variable? x) (symbol? x))
 
@@ -37,20 +37,20 @@
   (define (deriv-sum operands var)
     (let ((augend (car operands)) (addend (cadr operands)))
       (make-sum (deriv augend var) (deriv addend var))))
-    (put 'deriv '+ deriv-sum))
+    (put '+ 'deriv deriv-sum))
 
 (define (install-product)
   (define (deriv-product operands var)
     (let ((multiplier (car operands)) (multiplicand (cadr operands)))
       (make-sum (make-product (deriv multiplier var) multiplicand)
  	        (make-product multiplier (deriv multiplicand var)))))
-  (put 'deriv '* deriv-product))
+  (put '* 'deriv deriv-product))
 
 (define (install-exponentiation)
   (define (deriv-exponentiation operands var)
     (let ((base (car operands)) (exponent (cadr operands)))
       (make-product exponent (make-exponentiation base (- exponent 1)))))
-  (put 'deriv '** deriv-exponentiation))
+  (put '** 'deriv deriv-exponentiation))
 
 (install-sum)
 (install-product)
