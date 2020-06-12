@@ -1,0 +1,10 @@
+(define (make-from-mag-ang r theta)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) (* r (cos theta)))
+	  ((eq? op 'imag-part) (* r (sin theta)))
+	  ((eq? op 'magnitude) r)
+	  ((eq? op 'angle)     theta)
+	  (else (error "Unknown op - MAKE-FROM-MAG-ANG" op))))
+  dispatch)
+
+(define (apply-generic op arg) (arg op))
